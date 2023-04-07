@@ -16,21 +16,24 @@ body{
 .dropdown {
     text-align: center;
 }
-/*viz1*/
+
 .tooltipData{
     font-family: sans-serif;
     font-size: small;
 }
+
 #tooltip{
     opacity: 0;
     background-color: antiquewhite;
     position: absolute;
     width: auto;
     height: auto;
+    z-index: 1;
 }
 
 #yearSelector{
-    position: absolute;
+    position: fixed;
+    z-index: 1;
     top: 20px;
     left: 360px;
 }
@@ -43,23 +46,40 @@ body{
     padding-left: 4%;
     font-size: 24pt;
 }
-#container
-{
-    width: 90vw;
-    height: 80vh;
-}
-#geo
-{
-    height: 100vh;
+
+#geo {
+    width: 50%;
+    height: 50%;
     background-color: azure;
+    position: relative;
+    float: left;
 }
+
 path.path_geo{
     stroke-width: .5px;
     stroke: black;
 }
 
-/*viz2*/
 #bubble{
     background-color: rgb(241, 248, 180);
-    height: 100vh;
+    height: 50%;
+    width: 50%;
+    position: relative;
+    float: right;
+}
+
+#barChart{
+    background-color: rgb(124, 79, 114);
+    height: 50%;
+    width: 50%;
+    position: relative;
+    float: left;
+}
+
+#pieChart{
+    background-color: rgb(63, 81, 144);
+    height: 50%;
+    width: 50%;
+    position: relative;
+    float: right;
 }

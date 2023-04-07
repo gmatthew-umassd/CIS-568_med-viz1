@@ -16,7 +16,7 @@
 
 <body>
     <main class="d-flex flex-nowrap">
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 350px;height: 100vh;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 330px;height: 100vh;">
             <a href="index.html"
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi pe-none me-2" width="40" height="32"></svg>
@@ -25,19 +25,19 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link text-white active" id="home-tab" data-bs-toggle="tab"
+                    <button class="nav-link text-white" id="home-tab" data-bs-toggle="tab"
                         data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
                         aria-selected="true">Home</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link text-white" id="vis1-tab" data-bs-toggle="tab"
+                    <button class="nav-link text-white active" id="vis1-tab" data-bs-toggle="tab"
                         data-bs-target="#vis1-tab-pane" type="button" role="tab" aria-controls="vis1-tab-pane"
-                        aria-selected="false">Visualization 1</button>
+                        aria-selected="false">Map/Bubble</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link text-white" id="vis2-tab" data-bs-toggle="tab"
                         data-bs-target="#vis2-tab-pane" type="button" role="tab" aria-controls="vis2-tab-pane"
-                        aria-selected="false">Visualization 2</button>
+                        aria-selected="false">Bar/Pie</button>
                 </li>
             </ul>
             <hr>
@@ -47,9 +47,9 @@
 
         </div>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+            <div class="tab-pane fade" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
                 tabindex="0">Home content here</div>
-            <div class="tab-pane fade" id="vis1-tab-pane" role="tabpanel" aria-labelledby="vis1-tab" tabindex="0">
+            <div class="tab-pane fade show active" id="vis1-tab-pane" role="tabpanel" aria-labelledby="vis1-tab" tabindex="0">
                 <script src="lib/vis1.js"></script>
             </div>
             <div class="tab-pane fade" id="vis2-tab-pane" role="tabpanel" aria-labelledby="vis2-tab" tabindex="0">
