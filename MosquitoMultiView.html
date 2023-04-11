@@ -65,7 +65,7 @@
                                 svg.append("g").call(d3.axisBottom(x.domain(d3.map(data[1],d=>d.Date))  )).attr("transform","translate(0,470)")
 
                                 d3.map(data[1], function (d) {return console.log(x(d.Date))})
-                                console.log(data[1])
+                                console.log(data[0])
                                 var keys = data[1].columns.slice(1);
                                 console.log(keys)
                                 console.log(d3.stack().keys(keys)(data[1]))
@@ -79,7 +79,7 @@
                                 .selectAll("rect")
                                 .data(function(d,i) {
                                     d = d.map(dd=>{
-                                        dd["key"]=keys[i].trim().replace(" ","-").replace("/","-").replaceAll(" ","")
+                                        dd["key"]=keys[i].trim().replace(" ","").replace("/","").replaceAll(" ","")
                                         return dd
                                     })
                                     return d
@@ -88,6 +88,7 @@
                                 .append("rect").attr("class",(d,i)=>{
                                   
                                     return d["key"]
+                                    console.log(d["key"])
                                 })  
                                 .attr("x", function(d) {return x(d.data.Date)})
                                 .attr("y", function(d) { return y(d[1]); })
@@ -102,6 +103,7 @@
                                                            
                                                             
                                 .on("mouseout", function() { d3.selectAll("rect").classed("inactive", false)
+                                d3.select("#figure2").select("svg").remove()
                                 })
 
                                 
@@ -133,10 +135,10 @@
 var radius = Math.min(width, height) / 2 - margin.bottom
 
 
-svg2= d3.select("#figure2").append("svg").attr("width",  width + margin.left + margin.right)
+/*svg2= d3.select("#figure2").append("svg").attr("width",  width + margin.left + margin.right)
                                 .attr("height", height + margin.top + margin.bottom)
                                 .append("g")
-                                .attr("transform","translate(400,250)") 
+                                .attr("transform","translate(400,250)") */
 
 
 // set the color scale
@@ -145,24 +147,43 @@ var color = d3.scaleOrdinal()
 
   piechart = function(piedata) {
 
-  
+    svg2= d3.select("#figure2").append("svg").attr("width",  width + margin.left + margin.right)
+                                .attr("height", height + margin.top + margin.bottom)
+                                .append("g")
+                                .attr("transform","translate(400,250)")
 
     //Me messing around with turning a class into a filter to use on the data. I need to add all of the species groupers. Just want to get
     //it working first. 
-  var AedesGrouper = (function(d) {return d.Species=="Aedes triseriatus"||	d.Species=="Aedes c. canadensis"||	d.Species=="Aedes cantator"||	d.Species=="Aedes cinereus"||	d.Species=="Aedes j. japonicus"||	d.Species=="Aedes sollicitans"||	d.Species=="Aedes taeniorhynchus"||	d.Species=="Aedes vexans"||	d.Species=="Aedes trivittatus"||	d.Species=="Aedes sticticus"||	d.Species=="Aedes dupreei"||	d.Species=="Aedes stimulans"||	d.Species=="Aedes albopictus"||	d.Species=="Aedes provocans"})
-  var CullexGrouper = (function(d) {return d.Species =="Culiseta sp."||	d.Species =="Culiseta morsitans"||	d.Species =="Culiseta minnesotae"||	d.Species =="Culiseta melanura"||	d.Species =="Culiseta inornata"||	d.Species =="Culiseta impatiens"||	d.Species =="Culex territans"||	d.Species =="Culex sp."||	d.Species =="Culex salinarius"||	d.Species =="Culex restuans"||	d.Species =="Culex pipiens-restuans (Mixed)"||	d.Species =="Culex pipiens"
-  })
-  var pievar = function (piedata, grouper) {
+  var grouper2 = piedata.concat("Grouper")
+  var imageGrouper;
+
+  console.log(piedata)
+  var AedesGrouper = (function(d) {return d.Species=="Aedes triseriatus"||	d.Species=="Aedes c. canadensis"||	d.Species=="Aedes cantator"||	d.Species=="Aedes cinereus"||	d.Species=="Aedes j. japonicus"||	d.Species=="Aedes sollicitans"||
+                                    	d.Species=="Aedes taeniorhynchus"||	d.Species=="Aedes vexans"||	d.Species=="Aedes trivittatus"||	d.Species=="Aedes sticticus"||	d.Species=="Aedes dupreei"||	d.Species=="Aedes stimulans"||	d.Species=="Aedes albopictus"||	d.Species=="Aedes provocans"})
+  var CulexGrouper = (function(d) {return 	d.Species =="Culex territans"||	d.Species =="Culex sp."||	d.Species =="Culex salinarius"||	d.Species =="Culex restuans"||	d.Species =="Culex pipiens-restuans (Mixed)"||	d.Species =="Culex pipiens"})
+  var CulisetaGrouper = (function(d) {return d.species=="Culiseta sp."||	d.species=="Culiseta morsitans"||	d.species=="Culiseta minnesotae"||	d.species=="Culiseta melanura"||	d.species=="Culiseta inornata"||	d.species=="Culiseta impatiens"})
+  var AnophelesGrouper = (function (d) {return d.Species== "Anopheles walkeri"||	d.Species== "Anopheles quadrimaculatus s.s."||	d.Species== "Anopheles quadrimaculatus s.l."||	d.Species== "Anopheles punctipennis"||	d.Species== "Anopheles crucians complex"})
+  var PsorophoraGrouper = (function (d) {return d.Species == 'Psorophora ferox'})
+  var OtherGrouper = (function (d) {return d.Species == 'Other Species / Unknown'})
+  var UranotaeniaGrouper = (function (d) {return d.Species == 'Uranotaenia sapphirina'})
+  var CoquillettidiaGrouper = (function (d) {return d.Species == 'Coquillettidia perturbans'})
+
+
+  var pievar = function (piedata) {
  
-  if(piedata=='Aedes') {
-    
-    return AedesGrouper
-  }
-  else if (piedata='Cullex') {return CullexGrouper}
+  if(piedata=='Aedes') { imageGrouper=4; return AedesGrouper}
+  else if (piedata=='Culex') {imageGrouper=2;return CulexGrouper;}
+  else if (piedata=='Culliseta') {imageGrouper=0;return CulisetaGrouper;}
+  else if (piedata=='Psorophoraferox') {imageGrouper=3;return PsorophoraGrouper}
+  else if (piedata=='OtherSpecies/Unknown') {imageGrouper=5;return OtherGrouper}
+  else if (piedata=='Uranotaeniasapphirina') {imageGrouper=0;return UranotaeniaGrouper}
+  else if (piedata=='Anopheles') {imageGrouper=3;return AnophelesGrouper}
+  else if (piedata=='Coquillettidia') {imageGrouper=6; return CoquillettidiaGrouper}
 }
 
+
 console.log(pievar)
-data2 = data[0].filter(function(d){return d.Year == '2019'}).filter(pievar(piedata, AedesGrouper))
+data2 = data[0].filter(function(d){return d.Year == '2021'}).filter(pievar(piedata))
 
 
 // Compute the position of each group on the pie:
@@ -173,8 +194,14 @@ var outerarc = d3.arc()
   .outerRadius(radius * 0.9)
 
 console.log(pie(data2))
-const urlList = ([{url: "https://raw.githubusercontent.com/mshea12/week7-568/main/Aedes.png"},
-                                {url: "https://raw.githubusercontent.com/mshea12/CIS-568_med-viz1/main/mosquito%20(3).png"}])
+const urlList = ([{url: "https://raw.githubusercontent.com/mshea12/week7-568/main/bugimage.jpg"},
+                                {url: "https://raw.githubusercontent.com/mshea12/CIS-568_med-viz1/main/mosquito%20(3).png"},
+                                {url:"https://raw.githubusercontent.com/mshea12/week7-568/main/CulexPipens.png"},
+                              {url:"https://raw.githubusercontent.com/mshea12/week7-568/main/AnophelesGrouper.png"},
+                            {url:"https://raw.githubusercontent.com/mshea12/week7-568/main/AedesAlboGrouper.png"},
+                          {url: "https://raw.githubusercontent.com/mshea12/week7-568/main/OtherGrouper.png"},
+                        {url: "https://raw.githubusercontent.com/mshea12/week7-568/main/CoqGrouper.png"},
+                      {url:"https://raw.githubusercontent.com/mshea12/week7-568/main/CoqGrouper.png"}])
 
 
 // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
@@ -235,7 +262,7 @@ svg2
         return (midangle < Math.PI ? 'start' : 'end') })
 
   var centerSvg = svg2.append('image')
-                .attr("xlink:href", function(d){return urlList[0].url})
+                .attr("xlink:href", function(d){return urlList[imageGrouper].url})
                 .attr("width", 200)
                 .attr("height", 200)
                 .attr("transform", "translate(-90,-90)")
