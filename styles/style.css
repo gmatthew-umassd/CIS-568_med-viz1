@@ -83,3 +83,9 @@ path.path_geo{
     position: relative;
     float: right;
 }
+
+#legendContainer {
+    position: absolute;
+    left: 32%;
+    bottom: 2%;
+}
