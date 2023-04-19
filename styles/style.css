@@ -69,20 +69,24 @@ path.path_geo{
 }
 
 #barChart{
-    background-color: rgb(124, 79, 114);
-    height: 50%;
-    width: 50%;
-    position: relative;
-    float: left;
+    background-color: rgb(255, 250, 254);
+    width: 700px;
+    height: 600px;
+} 
+.table{
+   display: table;
+   width: 100%;
+}
+.table-row{
+    display: table-row;
+     width:100%; 
+    
+}
+.table-data{
+    display: table-cell; 
 }
 
-#pieChart{
-    background-color: rgb(63, 81, 144);
-    height: 50%;
-    width: 50%;
-    position: relative;
-    float: right;
-}
+
 
 #legendContainer {
     position: absolute;
