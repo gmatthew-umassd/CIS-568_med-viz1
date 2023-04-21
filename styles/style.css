@@ -90,6 +90,12 @@ path.path_geo {
     font-size: medium;
 }
 
+#title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
 .bubble-labels {
     font-size: x-large;
     font-weight: bold;
