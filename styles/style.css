@@ -7,6 +7,7 @@
 body {
     margin: 0;
     overflow: hidden;
+    font-family: Arial, sans-serif;
 }
 .tab-content {
     width: 100%;
@@ -34,8 +35,8 @@ body {
 #yearSelector {
     position: fixed;
     z-index: 1;
-    top: 20px;
-    left: 360px;
+    top: 60px;
+    left: 400px;
 }
 
 #caption {
@@ -105,4 +106,88 @@ path.path_geo {
     position: absolute;
     bottom: 20px;
     left: 450px;
+}
+
+header {
+    background-color: #4625a0; /* lawn green */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    margin: 0;
+    font-size: 48px;
+    color: #fff; /* white */
+    text-shadow: 2px 2px #333;
+}
+
+main {
+    margin: 20px;
+    padding: 20px;
+    background-color: #0c42804f; /* white */
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+h2 {
+    color: #7CFC00; /* lawn green */
+    margin-top: 0;
+}
+
+p {
+    line-height: 1.5;
+}
+
+ul {
+    margin: 0px;
+    padding-left: 150px;
+
+
+}
+
+li {
+    margin-top: 10px
+
+
+
+}
+
+/* Biology theme */
+body {
+    background-image: url('https://cdn.pixabay.com/photo/2015/09/10/02/08/lab-932926_960_720.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+header {
+    background-color: #0c4280; /* lime green */
+}
+
+h1 {
+    color: #F8F8FF; /* ghost white */
+    text-shadow: 2px 2px #333;
+}
+
+main {
+    background-color: #0c428086; /* ghost white */
+}
+
+h2 {
+    color: #32CD32; /* lime green */
+}
+img {
+    display: block;
+    padding-top: 10px
+}
+
+#home-scrollable {
+    height: 75vh;
+    overflow-y: auto;
+    margin: 20px;
+    padding: 20px;
+    background-color: #0c42804f; /* white */
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
