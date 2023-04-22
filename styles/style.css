@@ -74,6 +74,9 @@ path.path_geo {
     width: 700px;
     height: 600px;
 } 
+.inactive{
+    opacity: 0.5;
+}
 .table {
    display: table;
    width: 100%;
